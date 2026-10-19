@@ -1,24 +1,26 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <raylib.h>
+#include "./Headers/Game.hpp"
+#include "main.hpp"
+
+#define GLSL_VERSION 430
 
 int main(void)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    Game game({1200, 800}, 60);
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    InitWindow(game.getDimention().first, game.getDimention().second, "Julia Set");
 
-    SetTargetFPS(60);
+    Start();
+    
 
     while (!WindowShouldClose())
     {
-
         BeginDrawing();
-
             ClearBackground(RAYWHITE);
 
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+            Update();
 
         EndDrawing();
     }
@@ -26,4 +28,12 @@ int main(void)
     CloseWindow();
 
     return 0;
+}
+
+void Start(){
+    shader_frag = LoadShader(0, TextFormat("./Shaders/frag.glsl", GLSL_VERSION));
+}
+
+void Update(){
+
 }
